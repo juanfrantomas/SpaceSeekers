@@ -1,0 +1,64 @@
+body{
+	background: #000 url(../img/back.jpg) no-repeat top center;
+	/*
+	 -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  */
+}
+
+#frm_login{
+	margin: 343px auto;
+    width: 1170px;
+	
+}
+
+.text-in{
+	background: none repeat scroll 0 0 black;
+    border: medium none;
+    
+    height: 34px;
+    margin: 0 160px 20px 0;
+    width: 200px;
+    -webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	color: white;
+	padding: 5px 10px;
+	clear: both;
+}
+
+#email{
+	float: right;
+    position: relative;
+    right: -6px;
+    top: 0;
+}
+
+#pass{
+    float: right;
+    position: relative;
+    right: -6px;
+    top: 0;
+}
+
+#btn-login{
+    display: block;
+    float: right;
+    line-height: 24px;
+    position: relative;
+    right: 42px;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+   
+}
+
+#socials{
+	clear: both;
+    float: right;
+    position: relative;
+    right: 184px;
+    top: 65px;
+}

@@ -1,0 +1,33 @@
+/**
+* Origen de datos:
+* http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php
+*/
+
+	"event":{
+		"name": "X Per",
+		"Ra": "58.846",
+		"Dec": "31.046",
+		"status": "down",
+		"prob":"93.1"
+	},
+	"event":{
+		"name": "H1145-619",
+		"Ra": "177",
+		"Dec": "-62.207",
+		"status": "up",
+		"prob":"27.4"
+	},
+	"event":{
+		"name": "2S 1553-542",
+		"Ra": "239.454",
+		"Dec": "-54.415",
+		"status": "down",
+		"prob":"4.3"
+	},
+	"event":{
+		"name": "GX 3104-1",
+		"Ra": "195.321",
+		"Dec": "-61.602",
+		"status": "-",
+		"prob":"-"
+	}

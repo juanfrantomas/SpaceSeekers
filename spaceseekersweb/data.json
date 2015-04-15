@@ -1,0 +1,38 @@
+[
+    {
+        "name": "X Per",
+        "ra": "58.846",
+        "dec": "31.046",
+        "orbital-period": "250.3",
+        "status": "down",
+        "prob":"93.1",
+        "source": "http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php"
+    },
+    {
+        "name": "H1145-619",
+        "ra": "177",
+        "dec": "-62.207",
+        "orbital-period": "187.5",
+        "status": "up",
+        "prob":"27.4",
+        "source": "http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php"
+    },
+    {
+        "name": "2S 1553-542",
+        "ra": "239.454",
+        "dec": "-54.415",
+        "orbital-period": "29.56",
+        "status": "down",
+        "prob":"4.3",
+        "source": "http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php"
+    },
+    {
+        "name": "GX 3104-1",
+        "ra": "195.321",
+        "dec": "-61.602",
+        "orbital-period": "132.2",
+        "status": "-",
+        "prob":"-",
+        "source": "http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php"
+    }
+]
