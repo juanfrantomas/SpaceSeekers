@@ -1,0 +1,17 @@
+Básicamente es lo siguiente:
+- Una tabla ss_object donde estan los datos de los objetos observados (Ra, Dec, Periodo orbital, etc...)
+- Una tabla ss_historic con los datos de observacion, A tener en cuenta la columna moment
+que es un timestamp en formado yyyy-mm-dd hh:mm:ss, Lo uso para varias cosas, y es la fecha
+de la actualización. Se creará un histórico con fechas anteriores, así podremos tratar datos y 
+endulzar el proyecto.
+- Una tabla ss_origen con los datos de los instrumentos de medición (MAXI, etc...),
+nada, solo almacena el tipo de unidad de medida y el nombre. Es para filtrar datos y eventualmente escalar la aplicación con más fuentes de datos, unidades de medida, algoritmos de standarización, etc...
+
+El archivo index.php instala las tablas en la bd y parsea la tabla de la nasa que ya hemos 
+visto. El cron debe ejecutar este archivo unas cuantas veces al día, cada hora, para pillar las
+franjas horarias nocturnas.
+
+El archivo feed.php saca una estructura xml para rss. Hay un filtro que no he podido probar aun (faltan datos) para mostrar solo los de la última fecha. Lo testearé mañana.
+
+Lo demás son librerías. Ya documentaré mejor, de momento, funciona y permite testear la web
+y la app.
