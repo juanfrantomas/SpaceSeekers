@@ -76,6 +76,7 @@ class rss_feed  {
               $xml .= '    <flux>' . $rss_item->flux . '</flux>' . "\n";
               $xml .= '    <unit>' . $rss_item->unit . '</unit>' . "\n";
               $xml .= '    <source>' . $rss_item->source . '</source>' . "\n";
+              $xml .= '    <moment>' . $rss_item->moment . '</moment>' . "\n";
               $xml .= '</item>' . "\n";
               $x++;
         }
@@ -128,10 +129,7 @@ class rss_feed  {
             }
             $max_events[] = $max_event;
         }
-        echo "<pre>";
-        print_r($max_events);
-        echo "</pre>";
-      die();
+
         return $res;
     }
 }
