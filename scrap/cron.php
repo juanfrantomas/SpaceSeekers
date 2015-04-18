@@ -150,7 +150,7 @@ foreach($tbody->find('tr') as $tr){
                 } else {
                     $moment = new DateTime('now');
                 }
-                $ss_historic[$flag]['moment'] = $moment->format('Y-m-d');
+                $ss_historic[$flag]['moment'] = $moment->format('Y-m-d H:i:s');
             }
         }
         $x++;
