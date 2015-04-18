@@ -26,7 +26,7 @@ define( 'FERMI_INSTRUMENT', "Fermi/GBM");
 
 include 'installPlugin.php';
 require_once('simple_html_dom.php');
-include (dirname(dirname(__FILE__))."/wp-load.php");
+require_once (dirname(dirname(__FILE__))."/wp-load.php");
 
 /** Create tables */
 new installPlugin();
@@ -101,7 +101,7 @@ foreach($tbody->find('tr') as $tr){
             $ss_historic[$flag]['origen'] = array_search(FERMI_INSTRUMENT, $origenes);
         }
 
-        if(strpos($indices[$x], 'flux') !== FALSE) { //Flux measures cols
+        if(strpos($indices[$x], 'flux') !== FALSE) {                                    //Flux measures cols
             $span = $td->find( 'span' );
             if (count($span) > 0) {
                 //Flux change prob.
@@ -130,15 +130,21 @@ foreach($tbody->find('tr') as $tr){
                             $prob_value = 0;
                         $ss_historic[$flag]['prob_value'] = $prob_value;
                         break;
+
                 }
 
             }else{
-                if($col_value == "" || $col_value == "-"){
-                    $ss_historic[$flag]['average_value'] = "";
-                }else{
-                    //average flux value
-                    $ss_historic[$flag]['average_value'] = (float)$col_value;;
-                }
+                //Only average flux AND change flux prob if empty
+                if($col_value == "" || $col_value == "-")
+                    $ss_historic[$flag]['average_value'] = "0";
+                else
+                    $ss_historic[$flag]['average_value'] = (float)$col_value;           //average flux value
+
+                if(!isset($ss_historic[$flag]['prob']))
+                    $ss_historic[$flag]['prob'] = 0;
+
+                if(!isset($ss_historic[$flag]['prob_value']))
+                    $ss_historic[$flag]['prob_value'] = "0";
 
             }
         }else{
@@ -180,13 +186,28 @@ for($x = 0; $x < count($lecturas); $x++){
 
     foreach($lecturas[$x]['historico'] as $instrumento => $new_event){
 
-        $sql = $wpdb->prepare("SELECT * FROM ss_historic WHERE object = %d AND origen = %d ORDER BY moment DESC", $new_event['object'], $new_event['origen']);
+        //check if data has changed
+        $sql = $wpdb
+            ->prepare("SELECT * FROM ss_historic ".
+                              "WHERE object = %d ".
+                                "AND origen = %d ".
+                                "AND prob_value = ". $new_event['prob_value'] ." ".             //Prototype version
+                                "AND average_value = ". $new_event['average_value'] ." ".       //Prototype version
+                              "ORDER BY moment DESC",
+            $new_event['object'], $new_event['origen']);
+
         $events = $wpdb->get_results($sql);
+
         if(count($events) > 0){
-            $event = $events[0];
-            if($new_event['moment'] > $event->moment){
+            $event = $events[0]; //Most recent reading
+
+            $now_date = new DateTime($new_event['moment']);
+            $event_date = new DateTime($event->moment);
+
+            if($now_date->format('Ymd') > $event_date->format('Ymd')){
                 $wpdb->insert('ss_historic', $new_event);
             }
+
         }else{
             $wpdb->insert('ss_historic', $new_event);
         }

@@ -90,8 +90,8 @@ private function createEventRegistry(){
 
         $sqlTable = "CREATE TABLE `".$tableName."` (
               `idhistoric` INT NOT NULL AUTO_INCREMENT,
-              `prob_value` FLOAT NOT NULL,
-              `average_value` FLOAT NOT NULL,
+              `prob_value` DECIMAL(6, 3) NOT NULL,
+              `average_value` DECIMAL(6, 3) NOT NULL,
               `prob` TINYINT(1) NOT NULL,
               `moment` TIMESTAMP NOT NULL,
               `origen` INT NOT NULL,

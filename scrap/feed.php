@@ -1,6 +1,6 @@
 <?php
 
-//header('Content-type: application/xml');
+header('Content-type: application/xml');
 require_once "rss_feed.php";
 
 $xmlns = 'xmlns:content="http://purl.org/rss/1.0/modules/content/"

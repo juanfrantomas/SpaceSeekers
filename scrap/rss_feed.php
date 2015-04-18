@@ -96,6 +96,9 @@ class rss_feed  {
     }*/
 
     /**
+     * As a prototype, the feed in based
+     * on one instrument (MAXI in this case).
+     * Multiple instrument logic is on development.
      * @return array
     */
     public function get_feed_items() {
@@ -107,11 +110,12 @@ class rss_feed  {
                                 FROM
                                 ss_objects ob INNER JOIN ss_historic hi INNER JOIN ss_origen ori
                                 ON ob.idobject = hi.object AND hi.origen = ori.idorigen
+                                WHERE ori.instrumento = 'MAXI'
                                 ORDER BY moment DESC");
 
-        $max_events = array();
+
+        $max_event = array();
         for($x = 0; $x < count($res); $x++){
-            $max_event = array();
             if($res[$x]->prob > 0){
                 $res[$x]->status = "Rising flux";
             }else if($res[$x]->prob < 0){
@@ -121,14 +125,21 @@ class rss_feed  {
             }
 
             if(!isset($max_event[$res[$x]->name])){
+                //echo "Nuevo: ". $res[$x]->name;
                 $max_event[$res[$x]->name] = $res[$x];
             }else{
+                //echo "Conocido. ".$res[$x]->name.": ".$max_event[$res[$x]->name]->moment ." < ". $res[$x]->moment;
                 if($max_event[$res[$x]->name]->moment < $res[$x]->moment){
                     $max_event[$res[$x]->name] = $res[$x];
                 }
             }
-            $max_events[] = $max_event;
+            //echo "<br/>";
         }
+        $max_events = array();
+        foreach($max_event as $object => $max){
+            $max_events[] = $max;
+        }
+
 
         return $res;
     }
