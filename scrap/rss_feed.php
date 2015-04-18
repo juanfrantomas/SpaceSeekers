@@ -9,7 +9,7 @@
  *
  */
 
-include '../wp-load.php';
+include (dirname(dirname(__FILE__))."/wp-load.php");
 
 class rss_feed  {
 

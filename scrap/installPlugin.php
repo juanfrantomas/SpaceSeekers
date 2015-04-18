@@ -6,7 +6,7 @@
  * https://codex.wordpress.org/Creating_Tables_with_Plugins
  *
  */
-include '../wp-load.php';
+include (dirname(dirname(__FILE__))."/wp-load.php");
 
 class installPlugin {
 

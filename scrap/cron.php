@@ -26,7 +26,7 @@ define( 'FERMI_INSTRUMENT', "Fermi/GBM");
 
 include 'installPlugin.php';
 require_once('simple_html_dom.php');
-require_once('../wp-load.php');
+include (dirname(dirname(__FILE__))."/wp-load.php");
 
 /** Create tables */
 new installPlugin();
@@ -37,21 +37,22 @@ global $wpdb;
 
 
 $html = new simple_html_dom();
-$html->load_file(SPACE_SEEKERS_DATASOURCE);
+$str_html = file_get_contents(SPACE_SEEKERS_DATASOURCE);
+$html = $html->load($str_html);
 
 /** Col names $tables */
-$tables = $html->find('table');
-$table = $tables[0];
-$theads = $table->find('thead');
-$thead = $theads[0];
+$table = $html->find('table', 0);
+
+$thead = $table->find('thead', 0);
+
 $indices = array();
 foreach($thead->find('th') as $th){
     $indices[] = trim($th->plaintext);
 }
 
 
-$tbodys = $tables[0]->find('tbody');
-$tbody = $tbodys[0];
+$tbody = $table->find('tbody', 0);
+
 
 $tbl_origenes = $wpdb->get_results( 'SELECT idorigen, instrumento FROM ss_origen' );
 $origenes = array();
