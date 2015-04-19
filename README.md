@@ -7,7 +7,7 @@ At the **scrap folder** you will find source code of the NASA dataset scraper an
 data feed of the different events for the registered objects detected by MAXI, Swift/BAT and Fermi/GBM
 instruments.
 
-At the **JuanFran folder** --- Escribir texto en castellano aqui y lo traduzco.
+At the **App folder**
 
 # Scrap Folder
 
@@ -21,7 +21,7 @@ The server cron job will call cron.php several times a day, and the feed wil alw
 return the last registered events.
  
  
-# JuanFran folder
+# App folder
  
 
  
