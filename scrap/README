@@ -1,33 +1,18 @@
-/**
-* Origen de datos:
-* http://integral.esac.esa.int/bexrbmonitor/webpage_oneplot.php
-*/
+#Scrap Data Connector
 
-	"event":{
-		"name": "X Per",
-		"Ra": "58.846",
-		"Dec": "31.046",
-		"status": "down",
-		"prob":"93.1"
-	},
-	"event":{
-		"name": "H1145-619",
-		"Ra": "177",
-		"Dec": "-62.207",
-		"status": "up",
-		"prob":"27.4"
-	},
-	"event":{
-		"name": "2S 1553-542",
-		"Ra": "239.454",
-		"Dec": "-54.415",
-		"status": "down",
-		"prob":"4.3"
-	},
-	"event":{
-		"name": "GX 3104-1",
-		"Ra": "195.321",
-		"Dec": "-61.602",
-		"status": "-",
-		"prob":"-"
-	}
+All resources used in the project are Open Source.
+
+As prototype, we are using only one dataset and the event detection may not be correct, scientifically speaking.
+
+The files contained in this folder are classified as:
+
+- Libraries:
+**installPLugin.php** creates the tables at the database the first time it's fired.
+**rss_feed.php** is a modified library for generating rss feeds from database.
+**simple_html_dom.php** is a html parser for scraping the data from the table in the challenge proposed dataset.
+
+- Functional files
+**cron.php** it's fired by the server cronjob each hour, and read data from the sources.
+**feed.php** generates an xml structure for rss and any other data reader, with the lastest measures observed by the
+instruments.
+
