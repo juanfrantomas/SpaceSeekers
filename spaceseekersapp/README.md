@@ -1,48 +1,32 @@
-Onsen UI Quick Startup Guide
-====
+# SpaceSeekers
+Transient Watch – Daily news on active neutron stars and black holes on your mobile phone
 
-This document describes the minimum information required to develop an app using Onsen UI.
+This is a brief explanation about the projecto, and it's different parts.
 
-## Requirement
+At the **scrap folder** you will find source code of the NASA dataset scraper and the 
+data feed of the different events for the registered objects detected by MAXI, Swift/BAT and Fermi/GBM
+instruments.
 
- * Node.js - [Install Node.js](http://nodejs.org)
- * Cordova - Install by `npm install cordova`
+At the **App folder**
 
-## Development Instructions
+# Scrap Folder
 
-1. Install dependencies
+We use the PHP Simple Html DOM Parser for the web scraping process, and modified
+version of rss_feed library. The hole data connector is coded using PHP, but using 
+the Wordpress core as database management framework.
 
-    $ npm install
+The event detection is based on a 100% rising flux change probability.
+ 
+The server cron job will call cron.php several times a day, and the feed wil always
+return the last registered events.
+ 
+ 
+# App folder
+ 
 
-2. Install Gulp globally
+ 
+# Using the platform
 
-    $ npm install -g gulp
-
-3. Run `gulp serve` and run the web server
-
-    $ gulp serve
-
-You should see running app on browser and you can start to develop your app with Onsen UI.
-
-### Directory Layout
-
-    README.md     --> This file
-    gulpfile.js   --> Gulp tasks definition
-    www/          --> Asset files for app
-      index.html  --> App entry point
-      js/
-      styles/
-      lib/onsen/
-        stylus/   --> Stylus files for onsen-css-components.css
-        js/       --> JS files for Onsen UI
-        css/      --> CSS files for Onsen UI
-    platforms/    --> Cordova platform directory
-    plugins/      --> Cordova plugin directory
-    merges/       --> Cordova merge directory
-    hooks/        --> Cordova hook directory
-
-## Gulp Tasks
-
- * `gulp serve` - Running the app for development.
- * `gulp build` - Build several files for project.
- * `gulp jshint` - Generate [jshint](https://github.com/jshint/jshint) report.
+For testing propouses, we've created this user:
+- **User**:     test_seekers
+- **Password**:   demo_demo
