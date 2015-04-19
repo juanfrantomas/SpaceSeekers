@@ -31,6 +31,51 @@
         }, 100);
       };
     });
+    module.controller('loginform', ['$scope', '$http',
+  function($scope, $http) {
+
+    $scope.init = function(nav) {
+      if (localStorage.usuario != "") {
+alert(localStorage.usuario);
+        nav.pushPage('index.html');
+      }
+    }
+
+
+
+    $scope.entrar = function(usuario, pass, nav) {
+      /*
+       $scope.formData = {
+         usuario: usuario,
+         pass: pass
+       };*/
+      $http({
+        method: 'JSONP',
+        url: 'http://spaceseekers.org/wp-admin/admin-ajax.php?action=spacesk_app_login&username='+usuario+'&password='+pass+'&token=9990dcf8aa4c40bfe3ec3f3e7df14855&callback=JSON_CALLBACK',
+        //  data    : $.param($scope.formData),  // pass in data as strings
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        } // set the headers so angular passing info as form data (not request payload)
+      }).success(function(data) {
+        console.log(data);
+        $scope.datos = data['success'];
+        if ($scope.datos == true) {
+          localStorage.usuario = usuario;
+          nav.pushPage('inicio.html');
+        } else {
+          nav.pushPage('inicio.html');
+          alert("Los datos no son correctos o estan vacios");
+        }
+
+
+      });
+    };
+
+
+
+  }
+]);
+
   </script>
 
   <style>
@@ -283,7 +328,7 @@ font-size: 38px;
 
     </ons-page>
   </ons-template>
-  <ons-template id="page1.html">
+  <ons-template id="page1.html" ng-controller="loginform">
     <ons-page>
       <ons-toolbar>
         <div class="left">
@@ -300,12 +345,9 @@ font-size: 38px;
         <input type="email" class="text-input--underbar" placeholder="Email" value="">
         <input type="password" class="text-input--underbar" placeholder="Password" value="">
         <br><br>
-        <ons-button modifier="large" class="login-button" ng-click="menu.setMainPage('page3.html', {closeMenu: true})">Log In</ons-button>
+        <ons-button modifier="large" class="login-button" ng-click="entrar(email,password,menu)">Log In</ons-button>
         <br><br>
-        <ons-button modifier="quiet" class="forgot-password">Forgot password?</ons-button>
-        
-        <ons-button modifier="quiet" class="forgot-password">Register</ons-button>
-      </div>s
+       </div>s
     </ons-page>
   </ons-template>
 
