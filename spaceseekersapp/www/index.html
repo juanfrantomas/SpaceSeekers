@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en" ng-app="app">
 <head>
@@ -19,10 +20,28 @@
 
   <script>
    var module = angular.module('app', ['onsen']);
+  module.controller('EventsController', function($scope, $http) {
+$http({
+        method: 'JSONP',
+        dataType: 'jsonp',
+        url: 'http://spaceseekers.org/wp-admin/admin-ajax.php?action=spacesk_feed_reader',
+        //  data    : $.param($scope.formData),  // pass in data as strings
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        } // set the headers so angular passing info as form data (not request payload)
+      }).success(function(data) {
+        //console.log(data);
+       $scope.events = data;
 
-    module.controller('AppController', function($scope) {
+      }).error(function(data) {
+         // console.log(data);
+        $scope.events = [{"name":"1A 0535+262","ra":"84.73","dec":"26.32","orbital-period":"111.10","status":null,"prob":"0.00","flux":"-0.50","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"GX 304-1","ra":"195.32","dec":"-61.60","orbital-period":"132.20","status":null,"prob":"0.00","flux":"12.10","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"GRO J1008-57","ra":"152.44","dec":"-58.29","orbital-period":"249.48","status":null,"prob":"0.00","flux":"10.90","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"2S 1553-542","ra":"239.45","dec":"-54.42","orbital-period":"29.56","status":"Decreasing flux","prob":"6.00","flux":"9.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"H 1145-619","ra":"177.00","dec":"-62.21","orbital-period":"187.50","status":"Rising flux","prob":"32.60","flux":"16.90","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"X Per","ra":"58.85","dec":"31.05","orbital-period":"250.30","status":"Decreasing flux","prob":"37.60","flux":"25.70","unit":"mCrab","source":"MAXI","moment":"2015-04-19 14:08:10"},{"name":"RX J0146.9+6121","ra":"26.75","dec":"61.36","orbital-period":"0.00","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"Swift J2000.6+3210","ra":"300.09","dec":"32.19","orbital-period":"0.00","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"Swift J045106.8-694803","ra":"72.78","dec":"-69.80","orbital-period":"0.00","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"Swift J1626.6-5156","ra":"246.65","dec":"-51.94","orbital-period":"132.90","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"2S 1845-024","ra":"282.07","dec":"-2.42","orbital-period":"242.18","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"GRO J1750-27","ra":"267.29","dec":"-26.64","orbital-period":"29.82","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"XTE J1859+083","ra":"284.78","dec":"8.25","orbital-period":"0.00","status":null,"prob":"0.00","flux":"0.00","unit":"mCrab","source":"MAXI","moment":"2015-04-19 09:39:14"},{"name":"4U 0115+63","ra":"19.63","dec":"63.74","orbital-period":"24.30","status":null,"prob":"0.00","flux":"6.90","unit":"mCrab","source":"MAXI","moment":"2015-04-18 17:03:56"},{"name":"MAXI J1409-619","ra":"212.01","dec":"-61.98","orbital-period":"0.00","status":null,"prob":"0.00","flux":"15.20","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"V 0332+53","ra":"53.75","dec":"53.17","orbital-period":"34.25","status":null,"prob":"0.00","flux":"14.10","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"LS V +44 17","ra":"70.25","dec":"44.53","orbital-period":"155.00","status":null,"prob":"0.00","flux":"5.20","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"2S 1417-624","ra":"215.30","dec":"-62.70","orbital-period":"42.12","status":null,"prob":"0.00","flux":"7.00","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"MXB 0656-072","ra":"104.60","dec":"-7.20","orbital-period":"0.00","status":null,"prob":"0.00","flux":"-4.10","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"IGR J13020-6359","ra":"195.50","dec":"-63.97","orbital-period":"0.00","status":"Decreasing flux","prob":"8.70","flux":"7.70","unit":"mCrab","source":"MAXI","moment":"2015-04-17 09:39:14"},{"name":"Swift J1843.5-0343","ra":"280.90","dec":"-3.73","orbital-period":"0.00","status":null,"prob":"0.00","flux":"27.60","unit":"mCrab","source":"MAXI","moment":"2015-04-15 17:03:56"}];
+      });
 
-      
+  });
+    module.controller('AppController', function($scope, $http) {
+
+            
 
 
       $scope.doSomething = function() {
@@ -374,7 +393,7 @@ font-size: 38px;
  
   
     <ons-navigator>
-    <ons-page>
+    <ons-page ng-controller="EventsController">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button ng-click="menu.toggle()">
@@ -389,66 +408,22 @@ font-size: 38px;
 
 
         <ons-list style="margin: -1px 0">
-         <ons-list-item modifier="chevron" class="item" ng-click="doSomething()">
+         <ons-list-item modifier="chevron" class="item" ng-repeat="event in events">
             <ons-row>
               <ons-col width="60px"> 
                 <div class="item-thum"></div>
               </ons-col>
               <ons-col>
                 <header>
-                  <span class="item-title">X Per</span>
-                  <span class="item-label">5h</span>
+                  <span class="item-title">{{ event.name }}</span>
+                  <span class="item-label">{{ event.status }}</span>
                 </header>
-                <p class="item-desc">RA: "58.846", DEC: "31.046", orbitAl-period: "250.3"</p>
+                <p class="item-desc">RA: "{{ event.ra }}", DEC: " {{ event.dec }}", orbitAl-period: "{{ event.orbital-period}}"</p>
               </ons-col>
             </ons-row> 
                  </ons-list-item>
-                 <ons-list-item modifier="chevron" class="item" ng-click="doSomething()">
-                 
-             <ons-row>
-              <ons-col width="60px"> 
-                <div class="item-thum"></div>
-              </ons-col>
-              <ons-col>
-                <header>
-                  <span class="item-title">H1145-619</span>
-                  <span class="item-label">5h</span>
-                </header>
-                <p class="item-desc">RA: "177" DEC: "-62.207" orbitAl-period: "187.5"</p>
-              </ons-col>
-            </ons-row>  
-                         </ons-list-item>
-                             <ons-list-item modifier="chevron" class="item" ng-click="doSomething()">
-         
-             <ons-row>
-              <ons-col width="60px"> 
-                <div class="item-thum"></div>
-              </ons-col>
-              <ons-col>
-                <header>
-                  <span class="item-title">2S 1553-542</span>
-                  <span class="item-label">5h</span>
-                </header>
-                <p class="item-desc">RA: "239.454"  DEC: "-54.415"  orbitAl-period: "29.56"</p>
-              </ons-col>
-            </ons-row>  
-                          </ons-list-item>
-                             <ons-list-item modifier="chevron" class="item" ng-click="doSomething()">
-        
-             <ons-row>
-              <ons-col width="60px"> 
-                <div class="item-thum"></div>
-              </ons-col>
-              <ons-col>
-                <header>
-                  <span class="item-title">GX 3104-1</span>
-                  <span class="item-label">5h</span>
-                </header>
-                <p class="item-desc">RA: "195.321", DEC: "-61.602", orbitAl-period: "132.2".</p>
-              </ons-col>
-            </ons-row>  
-                              
-          </ons-list-item>
+      
+                             
         </ons-list>
       </ons-page>
     </ons-navigator>
