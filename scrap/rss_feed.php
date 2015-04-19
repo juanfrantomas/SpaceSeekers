@@ -116,33 +116,31 @@ class rss_feed  {
                                 ORDER BY moment DESC");
 
 
+
         $max_event = array();
         for($x = 0; $x < count($res); $x++){
             if($res[$x]->prob > 0){
                 $res[$x]->status = "Rising flux";
             }else if($res[$x]->prob < 0){
+                $res[$x]->prob = $res[$x]->prob * -1;
                 $res[$x]->status = "Decreasing flux";
             }else{
                 $res[$x]->status = "";
             }
 
             if(!isset($max_event[$res[$x]->name])){
-                //echo "Nuevo: ". $res[$x]->name;
                 $max_event[$res[$x]->name] = $res[$x];
             }else{
-                //echo "Conocido. ".$res[$x]->name.": ".$max_event[$res[$x]->name]->moment ." < ". $res[$x]->moment;
                 if($max_event[$res[$x]->name]->moment < $res[$x]->moment){
                     $max_event[$res[$x]->name] = $res[$x];
                 }
             }
-            //echo "<br/>";
         }
         $max_events = array();
         foreach($max_event as $object => $max){
             $max_events[] = $max;
         }
 
-
-        return $res;
+        return $max_events;
     }
 }
