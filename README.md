@@ -23,3 +23,10 @@ return the last registered events.
  
 # JuanFran folder
  
+
+ 
+# Using the platform
+
+For testing propouses, we've created this user:
+- **User**: 		test_seekers
+- **Password**: 	demo_demo

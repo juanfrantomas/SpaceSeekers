@@ -7,6 +7,10 @@
  * @license    MIT http://opensource.org/licenses/MIT
  * @version    0.1.0 (28 July 2013)
  *
+ * Library modified to include Wordpress Core for database handling.
+ * get_feed_items() has been modified to load items from database instead of
+ * doing it from json file, as originally intended.
+ *
  */
 
 include (dirname(dirname(__FILE__))."/wp-load.php");
@@ -88,17 +92,15 @@ class rss_feed  {
         return $xml;
     }
 
-
-    /*public function get_feed_items(){
-        $json = file_get_contents('data.json');
-        $json_obj = json_decode($json);
-        return $json_obj;
-    }*/
-
     /**
      * As a prototype, the feed in based
      * on one instrument (MAXI in this case).
      * Multiple instrument logic is on development.
+     *
+     * This function loads all readings sorted by date,
+     * evaluates each measure filtering old ones, and
+     * returning the most recent ones.
+     *
      * @return array
     */
     public function get_feed_items() {
